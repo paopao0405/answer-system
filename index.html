@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问卷编号查询</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            background: white;
+            display: inline-block;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 { color: #333; margin-top: 0; }
+        input {
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+        input:focus { border-color: #007bff; }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #007bff;
+            color: white;
+            border: 0;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover { background: #0056b3; }
+        #result {
+            margin-top: 25px;
+            font-size: 18px;
+            color: #333;
+            min-height: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🔍 问卷编号查询</h2>
+    <div>
+        <input type="text" id="num" placeholder="请输入编号 (例如: 4356)">
+        <button onclick="cx()">查询</button>
+    </div>
+    <div id="result"></div>
+</div>
+
+<script>
+    function cx() {
+        var n = document.getElementById("num").value.trim();
+        var resultDiv = document.getElementById("result");
+
+        /* 
+         * ==========================================
+         * 【数据修改区 - 开始】
+         * 以后新增或修改数据，只动下面这个 data 列表！
+         * 格式："编号": "对应的内容",
+         * ==========================================
+         */
+        var data = {
+            "4356": "25岁职场人员，优购买过护肤品人群",
+            "1234": "测试内容 这是1234的回答",
+            "0001": "这是0001的回答"
+        };
+        /* 
+         * ==========================================
+         * 【数据修改区 - 结束】
+         * ==========================================
+         */
+
+        if (n === "") {
+            resultDiv.innerText = "请输入编号！";
+            resultDiv.style.color = "red";
+        } else if (data[n]) {
+            resultDiv.innerText = data[n];
+            resultDiv.style.color = "#333";
+        } else {
+            resultDiv.innerText = "❌ 没有找到这个编号";
+            resultDiv.style.color = "red";
+        }
+    }
+
+    // 按回车键也能查询
+    document.getElementById("num").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            cx();
+        }
+    });
+</script>
+
+</body>
+</html>
+💡 以后修改数据的“傻瓜式”操作：
